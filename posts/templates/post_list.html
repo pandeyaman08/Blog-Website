@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Posts</title>
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Your CSS -->
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .post {
+            background: #fff;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+        .post h2 {
+            margin: 0 0 10px;
+            color: #333;
+        }
+        .post p {
+            color: #555;
+        }
+        .date {
+            font-size: 0.85rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-blog"></i> Blog Posts</h1>
+
+        {% for post in posts %}
+            <div class="post">
+                <h2>{{ post.title }}</h2>
+                <p class="date">Published on {{ post.created_at|date:"F j, Y, g:i a" }}</p>
+                <p>{{ post.content|truncatewords:30 }}</p>
+            </div>
+        {% empty %}
+            <p>No posts yet. <i class="fas fa-sad-tear"></i></p>
+        {% endfor %}
+    </div>
+</body>
+</html>
